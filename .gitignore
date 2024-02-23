@@ -1,0 +1,9 @@
+a.out
+*.o
+libft/libft.a
+pipex
+pipex_bonus
+test.c
+test_access.c
+testenv.c
+*.swp
