@@ -6,7 +6,7 @@
 /*   By: tde-la-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:19:04 by tde-la-r          #+#    #+#             */
-/*   Updated: 2024/02/23 17:30:16 by tde-la-r         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:44:33 by tde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,24 @@ void	test_access(char **paths, char **args, t_cmd **list)
 		parser_exit(paths, args, list, ERR_MALLOC);
 }
 
+char	**parse_command(char *cmd, char **paths, t_cmd *list)
+{
+	char	**args;
+
+	args = ft_split(cmd, ' ');
+	if (!args)
+		parser_exit(paths, args, &list, ERR_MALLOC);
+	if (!args[0])
+		parser_exit(paths, args, &list, ERR_NO_ARGS);
+	if (access(args[0], X_OK))
+		test_access(paths, args, &list);
+	return (args);
+}
+
 t_cmd	*create_cmds_list(char **argv, char **envp)
 {
-	char	**paths;
 	char	**args;
+	char	**paths;
 	t_cmd	*list;
 	t_cmd	*new_node;
 	int		i;
@@ -70,11 +84,7 @@ t_cmd	*create_cmds_list(char **argv, char **envp)
 	i = 0;
 	while (argv[i + 1])
 	{
-		args = ft_split(argv[i], ' ');
-		if (!args)
-			parser_exit(paths, args, &list, ERR_MALLOC);
-		if (access(args[0], X_OK))
-			test_access(paths, args, &list);
+		args = parse_command(argv[i], paths, list);
 		new_node = ft_cmdnew(args);
 		if (!new_node)
 			parser_exit(paths, args, &list, ERR_MALLOC);

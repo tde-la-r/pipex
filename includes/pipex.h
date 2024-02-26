@@ -6,7 +6,7 @@
 /*   By: tde-la-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 23:05:13 by tde-la-r          #+#    #+#             */
-/*   Updated: 2024/02/23 17:50:15 by tde-la-r         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:32:47 by tde-la-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERR_DUP "dup2"
 # define ERR_EXECVE "execve"
 # define ERR_NO_PATH "Error : path to cmds not found"
+# define ERR_NO_ARGS "Error : command not found"
 # define ERR_HERE_DOC "pipex: warning: here-document delimited by end-of-file"
 # define TMP_FILE "tmp"
 
